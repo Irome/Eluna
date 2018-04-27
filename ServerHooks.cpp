@@ -120,7 +120,11 @@ bool Eluna::OnAreaTrigger(Player* pPlayer, AreaTriggerEntry const* pTrigger)
 {
     START_HOOK_WITH_RETVAL(TRIGGER_EVENT_ON_TRIGGER, false);
     Push(pPlayer);
+#ifndef AZEROTHCORE
     Push(pTrigger->id);
+#else
+    Push(pTrigger->entry);
+#endif
     return CallAllFunctionsBool(ServerEventBindings, key);
 }
 
@@ -265,11 +269,17 @@ void Eluna::OnOpenStateChange(bool open)
     Push(open);
     CallAllFunctions(ServerEventBindings, key);
 }
-
+#ifndef AZEROTHCORE
 void Eluna::OnConfigLoad(bool reload)
+#else
+void Eluna::OnConfigLoad(bool reload, bool isBefore)
+#endif
 {
     START_HOOK(WORLD_EVENT_ON_CONFIG_LOAD);
     Push(reload);
+#ifdef AZEROTHCORE
+    Push(isBefore);
+#endif
     CallAllFunctions(ServerEventBindings, key);
 }
 

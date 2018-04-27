@@ -661,7 +661,7 @@ namespace LuaWorldObject
     {
         WorldObject* target = Eluna::CHECKOBJ<WorldObject>(L, 2, false);
 
-#ifdef TRINITY
+#if define TRINITY && !define AZEROTHCORE
         if (target)
             Eluna::Push(L, obj->GetAbsoluteAngle(target));
         else
