@@ -11,7 +11,7 @@
 #include "ElunaIncludes.h"
 #include "ElunaTemplate.h"
 
-#ifdef SUNWELL 
+#ifdef AZEROTHCORE 
 #define TRINITY
 #endif
 
@@ -128,6 +128,6 @@ bool Eluna::OnRemove(Player* pPlayer, Item* pItem)
     return CallAllFunctionsBool(ItemEventBindings, key);
 }
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif

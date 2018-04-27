@@ -16,7 +16,7 @@
 #endif
 #include <map>
 
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 #include "Define.h"
 #else
 #include "Platform/Define.h"

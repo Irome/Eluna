@@ -9,7 +9,7 @@
 
 #include "ElunaInstanceAI.h"
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -217,11 +217,11 @@ namespace LuaMap
         switch (GUID_HIPART(guid))
         {
             case HIGHGUID_PLAYER:
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
 				Eluna::Push(L, eObjectAccessor()GetPlayer(map, ObjectGuid(guid)));
 #else
 				Eluna::Push(L, map->GetPlayer(ObjectGuid(guid)));
-#endif // !SUNWELL
+#endif // !AZEROTHCORE
 
                 break;
             case HIGHGUID_TRANSPORT:
@@ -373,7 +373,7 @@ namespace LuaMap
     }
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

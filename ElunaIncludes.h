@@ -39,7 +39,7 @@
 #include "WorldPacket.h"
 #include "WorldSession.h"
 
-#if defined TRINITY || defined SUNWELL
+#if defined TRINITY || defined AZEROTHCORE
 #include "Config.h"
 #include "GameEventMgr.h"
 #include "GroupMgr.h"
@@ -112,7 +112,7 @@ typedef Opcodes                 OpcodesList;
 #endif
 #endif
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define CORE_NAME               "AyaseCore"
 #define CORE_VERSION			""
 #define eWorld                  (sWorld)
@@ -126,7 +126,7 @@ typedef Opcodes                 OpcodesList;
 #define eObjectAccessor()       ObjectAccessor::
 #endif
 
-#if !defined TRINITY && !defined SUNWELL
+#if !defined TRINITY && !defined AZEROTHCORE
 #define eWorld                  (&sWorld)
 #define eMapMgr                 (&sMapMgr)
 #define eConfigMgr              (&sConfig)

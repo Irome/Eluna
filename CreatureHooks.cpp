@@ -11,7 +11,7 @@
 #include "ElunaIncludes.h"
 #include "ElunaTemplate.h"
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -334,7 +334,7 @@ bool Eluna::OwnerAttacked(Creature* me, Unit* target)
     return CallAllFunctionsBool(CreatureEventBindings, CreatureUniqueBindings, entry_key, unique_key);
 }
 
-#if defined TRINITY && defined SUNWELL
+#if defined TRINITY && defined AZEROTHCORE
 #undef TRINITY
 #endif
 

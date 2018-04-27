@@ -7,7 +7,7 @@
 #ifndef GUILDMETHODS_H
 #define GUILDMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -259,7 +259,7 @@ namespace LuaGuild
         Player* player = Eluna::CHECKOBJ<Player>(L, 2);
         uint8 rankId = Eluna::CHECKVAL<uint8>(L, 3, GUILD_RANK_NONE);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
         SQLTransaction trans(nullptr);
         guild->AddMember(trans, player->GET_GUID(), rankId);
 #else
@@ -299,7 +299,7 @@ namespace LuaGuild
         Player* player = Eluna::CHECKOBJ<Player>(L, 2);
         uint8 newRank = Eluna::CHECKVAL<uint8>(L, 3);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		SQLTransaction trans(nullptr);
         guild->ChangeMemberRank(trans, player->GET_GUID(), newRank);
 #else
@@ -309,7 +309,7 @@ namespace LuaGuild
     }
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

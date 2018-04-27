@@ -7,7 +7,7 @@
 #ifndef WORLDOBJECTMETHODS_H
 #define WORLDOBJECTMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -190,7 +190,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::UnitLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(target, checker);
         Cell::VisitWorldObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::UnitLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, target, checker);
 		obj->VisitNearbyObject(range,searcher);
 #else
@@ -222,7 +222,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::GameObjectLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(target, checker);
         Cell::VisitGridObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::GameObjectLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, target, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -256,7 +256,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::CreatureLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(target, checker);
         Cell::VisitGridObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::CreatureLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, target, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -288,7 +288,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::PlayerListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(list, checker);
         Cell::VisitWorldObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::PlayerListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, list, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -332,7 +332,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::CreatureListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(list, checker);
         Cell::VisitGridObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::CreatureListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, list, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -374,7 +374,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::GameObjectListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(list, checker);
         Cell::VisitGridObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::GameObjectListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, list, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -424,7 +424,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::WorldObjectLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(target, checker);
         Cell::VisitAllObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::WorldObjectLastSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, target, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -464,7 +464,7 @@ namespace LuaWorldObject
 #ifndef TRINITY
         MaNGOS::WorldObjectListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(list, checker);
         Cell::VisitAllObjects(obj, searcher, range);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Trinity::WorldObjectListSearcher<ElunaUtil::WorldObjectInRangeCheck> searcher(obj, list, checker);
 		obj->VisitNearbyObject(range, searcher);
 #else
@@ -720,7 +720,7 @@ namespace LuaWorldObject
         uint32 respawnDelay = Eluna::CHECKVAL<uint32>(L, 7, 30);
 #ifndef TRINITY
         Eluna::Push(L, obj->SummonGameObject(entry, x, y, z, o, respawnDelay));
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		Eluna::Push(L, obj->SummonGameObject(entry, x, y, z, o, 0, 0, 0, 0, respawnDelay));
 #else
         QuaternionData rot = QuaternionData::fromEulerAnglesZYX(o, 0.f, 0.f);
@@ -1202,7 +1202,7 @@ namespace LuaWorldObject
         return 0;
     }
 };
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

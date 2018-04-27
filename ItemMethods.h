@@ -7,7 +7,7 @@
 #ifndef ITEMMETHODS_H
 #define ITEMMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -750,7 +750,7 @@ namespace LuaItem
     }
 };
 
-#if defined TRINITY && defined SUNWELL
+#if defined TRINITY && defined AZEROTHCORE
 #undef TRINITY
 #endif
 #endif

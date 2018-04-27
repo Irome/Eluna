@@ -7,7 +7,7 @@
 #ifndef AURAMETHODS_H
 #define AURAMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -213,7 +213,7 @@ namespace LuaAura
     }
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

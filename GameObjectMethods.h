@@ -7,7 +7,7 @@
 #ifndef GAMEOBJECTMETHODS_H
 #define GAMEOBJECTMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -165,7 +165,7 @@ namespace LuaGameObject
     int GetDBTableGUIDLow(lua_State* L, GameObject* go)
     {
 #ifdef TRINITY
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Eluna::Push(L, go->GetSpawnId());
 #else
 		Eluna::Push(L, go->GetDBTableGUIDLow());
@@ -332,7 +332,7 @@ namespace LuaGameObject
     }
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

@@ -7,7 +7,7 @@
 #ifndef GROUPMETHODS_H
 #define GROUPMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -406,7 +406,7 @@ namespace LuaGroup
     }*/
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

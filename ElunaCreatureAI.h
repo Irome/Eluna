@@ -10,12 +10,12 @@
 #include "LuaEngine.h"
 #include "ScriptedCreature.h"
 
-#if !defined TRINITY && !defined SUNWELL 
+#if !defined TRINITY && !defined AZEROTHCORE 
 class AggressorAI;
 typedef AggressorAI ScriptedAI;
 #else
 struct ScriptedAI;
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 #endif
@@ -45,7 +45,7 @@ struct ElunaCreatureAI : ScriptedAI
         if (justSpawned)
         {
             justSpawned = false;
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 			JustAppeared();
 #else
             JustRespawned();
@@ -74,7 +74,7 @@ struct ElunaCreatureAI : ScriptedAI
         }
     }
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
     // Called for reaction when initially engaged - this will always happen _after_ JustEnteredCombat
     // Called at creature aggro either by MoveInLOS or Attack Start
     void JustEngagedWith(Unit* target) override
@@ -93,16 +93,16 @@ struct ElunaCreatureAI : ScriptedAI
 #endif
 
     // Called at any Damage from any attacker (before damage apply)
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 	void DamageTaken(Unit* attacker, uint32& damage) override
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 	void DamageTaken(Unit* attacker, uint32& damage, DamageEffectType damagetype, SpellSchoolMask damageSchoolMask) override
 #endif
     {
         if (!sEluna->DamageTaken(me, attacker, damage))
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
             ScriptedAI::DamageTaken(attacker, damage);
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 			ScriptedAI::DamageTaken(attacker, damage, damagetype, damageSchoolMask);
 #endif
 	}
@@ -150,7 +150,7 @@ struct ElunaCreatureAI : ScriptedAI
             ScriptedAI::AttackStart(target);
     }
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 	// Called for reaction at stopping attack at no attackers or targets
     void EnterEvadeMode(EvadeReason /*why*/) override
     {
@@ -166,7 +166,7 @@ struct ElunaCreatureAI : ScriptedAI
     }
 #endif
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 	// Called when creature appears in the world (spawn, respawn, grid load etc...)
     void JustAppeared() override
     {
@@ -266,7 +266,7 @@ struct ElunaCreatureAI : ScriptedAI
 #endif
 };
 
-#if defined TRINITY && defined SUNWELL
+#if defined TRINITY && defined AZEROTHCORE
 #undef TRINITY
 #endif
 

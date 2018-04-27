@@ -7,7 +7,7 @@
 #ifndef QUERYMETHODS_H
 #define QUERYMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -312,7 +312,7 @@ namespace LuaQuery
                 // MYSQL_TYPE_LONGLONG Interpreted as string for lua
                 switch (row[i].GetType())
                 {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
                     case DatabaseFieldTypes::Int8:
                     case DatabaseFieldTypes::Int16:
                     case DatabaseFieldTypes::Int32:
@@ -369,7 +369,7 @@ namespace LuaQuery
 };
 #undef RESULT
 
-#if defined TRINITY && defined SUNWELL
+#if defined TRINITY && defined AZEROTHCORE
 #undef TRINITY
 #endif
 

@@ -32,7 +32,7 @@
 #define USING_BOOST
 #endif
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #undef USING_BOOST
 #endif
 

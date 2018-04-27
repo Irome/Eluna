@@ -34,7 +34,7 @@ namespace LuaBattleGround
     int GetAlivePlayersCountByTeam(lua_State* L, BattleGround* bg)
     {
         uint32 team = Eluna::CHECKVAL<uint32>(L, 2);
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Eluna::Push(L, bg->GetAlivePlayersCountByTeam((Team)team));
 #else
 		Eluna::Push(L, bg->GetAlivePlayersCountByTeam((TeamId)team));
@@ -67,7 +67,7 @@ namespace LuaBattleGround
         return 1;
     }
 
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
     /**
      * Returns the bracket ID of the specific [BattleGround].
      *
@@ -104,7 +104,7 @@ namespace LuaBattleGround
     int GetFreeSlotsForTeam(lua_State* L, BattleGround* bg)
     {
         uint32 team = Eluna::CHECKVAL<uint32>(L, 2);
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Eluna::Push(L, bg->GetFreeSlotsForTeam((Team)team));
 #else
 		Eluna::Push(L, bg->GetFreeSlotsForTeam((TeamId)team));
@@ -141,7 +141,7 @@ namespace LuaBattleGround
      */
     int GetTypeId(lua_State* L, BattleGround* bg)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Eluna::Push(L, bg->GetTypeID());
 #else
 		Eluna::Push(L, bg->GetBgTypeID());
@@ -178,7 +178,7 @@ namespace LuaBattleGround
      */
     int GetMaxPlayers(lua_State* L, BattleGround* bg)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
 		Eluna::Push(L, bg->GetMaxPlayers());
 #else
 		Eluna::Push(L, bg->GetMaxPlayersPerTeam() * 2);
@@ -193,7 +193,7 @@ namespace LuaBattleGround
      */
     int GetMinPlayers(lua_State* L, BattleGround* bg)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
 		Eluna::Push(L, bg->GetMinPlayers());
 #else
 		Eluna::Push(L, bg->GetMaxPlayersPerTeam() * 2);

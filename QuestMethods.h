@@ -7,7 +7,7 @@
 #ifndef QUESTMETHODS_H
 #define QUESTMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -189,7 +189,7 @@ namespace LuaQuest
     }*/
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

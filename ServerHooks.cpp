@@ -12,7 +12,7 @@
 #include "ElunaIncludes.h"
 #include "ElunaTemplate.h"
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -139,7 +139,7 @@ void Eluna::OnAdd(AuctionHouseObject* /*ah*/, AuctionEntry* entry)
 {
     Player* owner = eObjectAccessor()FindPlayer(MAKE_NEW_GUID(entry->owner, 0, HIGHGUID_PLAYER));
 #ifdef TRINITY
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
     Item* item = eAuctionMgr->GetAItem(entry->itemGUIDLow);
 #else
 	Item* item = eAuctionMgr->GetAItem(entry->item_guidlow);
@@ -170,7 +170,7 @@ void Eluna::OnRemove(AuctionHouseObject* /*ah*/, AuctionEntry* entry)
 {
     Player* owner = eObjectAccessor()FindPlayer(MAKE_NEW_GUID(entry->owner, 0, HIGHGUID_PLAYER));
 #ifdef TRINITY
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
 	Item* item = eAuctionMgr->GetAItem(entry->itemGUIDLow);
 #else
 	Item* item = eAuctionMgr->GetAItem(entry->item_guidlow);
@@ -201,7 +201,7 @@ void Eluna::OnSuccessful(AuctionHouseObject* /*ah*/, AuctionEntry* entry)
 {
     Player* owner = eObjectAccessor()FindPlayer(MAKE_NEW_GUID(entry->owner, 0, HIGHGUID_PLAYER));
 #ifdef TRINITY
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
 	Item* item = eAuctionMgr->GetAItem(entry->itemGUIDLow);
 #else
 	Item* item = eAuctionMgr->GetAItem(entry->item_guidlow);
@@ -232,7 +232,7 @@ void Eluna::OnExpire(AuctionHouseObject* /*ah*/, AuctionEntry* entry)
 {
     Player* owner = eObjectAccessor()FindPlayer(MAKE_NEW_GUID(entry->owner, 0, HIGHGUID_PLAYER));
 #ifdef TRINITY
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
 	Item* item = eAuctionMgr->GetAItem(entry->itemGUIDLow);
 #else
 	Item* item = eAuctionMgr->GetAItem(entry->item_guidlow);
@@ -369,6 +369,6 @@ void Eluna::OnRemove(Creature* creature)
     CallAllFunctions(ServerEventBindings, key);
 }
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif

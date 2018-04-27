@@ -7,7 +7,7 @@
 #ifndef PLAYERMETHODS_H
 #define PLAYERMETHODS_H
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -217,7 +217,7 @@ namespace LuaPlayer
     {
         uint32 spellId = Eluna::CHECKVAL<uint32>(L, 2);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
         Eluna::Push(L, player->GetSpellHistory()->HasCooldown(spellId));
 #else
         Eluna::Push(L, player->HasSpellCooldown(spellId));
@@ -465,7 +465,7 @@ namespace LuaPlayer
      */
     int IsHorde(lua_State* L, Player* player)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Eluna::Push(L, (player->GetTeam() == HORDE));
 #else
 		Eluna::Push(L, (player->GetTeamId() == TEAM_HORDE));
@@ -480,7 +480,7 @@ namespace LuaPlayer
      */
     int IsAlliance(lua_State* L, Player* player)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Eluna::Push(L, (player->GetTeam() == ALLIANCE));
 #else
 		Eluna::Push(L, (player->GetTeamId() == TEAM_ALLIANCE));
@@ -838,7 +838,7 @@ namespace LuaPlayer
     {
         uint32 spellId = Eluna::CHECKVAL<uint32>(L, 2);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(spellId))
             Eluna::Push(L, player->GetSpellHistory()->GetRemainingCooldown(spellInfo));
         else
@@ -860,7 +860,7 @@ namespace LuaPlayer
         return 1;
     }
 
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
     /**
      * Returns the faction ID the [Player] is currently flagged as champion for
      *
@@ -1563,7 +1563,7 @@ namespace LuaPlayer
     int GetAccountName(lua_State* L, Player* player)
     {
         std::string accName;
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         if (eAccountMgr->GetName(player->GetSession()->GetAccountId(), accName))
 #else
 		if (AccountMgr::GetName(player->GetSession()->GetAccountId(), accName))
@@ -2157,7 +2157,7 @@ namespace LuaPlayer
      */
     int SaveToDB(lua_State* /*L*/, Player* player)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         player->SaveToDB();
 #else
 		player->SaveToDB(false, false);
@@ -2174,7 +2174,7 @@ namespace LuaPlayer
     {
         Unit* summoner = Eluna::CHECKOBJ<Unit>(L, 2);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
         player->SendSummonRequestFrom(summoner);
 #else
         float x, y, z;
@@ -2252,7 +2252,7 @@ namespace LuaPlayer
 #ifndef TRINITY
         AuctionHouseEntry const* ahEntry = AuctionHouseMgr::GetAuctionHouseEntry(unit);
 #else
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         AuctionHouseEntry const* ahEntry = AuctionHouseMgr::GetAuctionHouseEntry(unit->GetFaction());
 #else
 		AuctionHouseEntry const* ahEntry = AuctionHouseMgr::GetAuctionHouseEntry(unit->getFaction());
@@ -2262,7 +2262,7 @@ namespace LuaPlayer
             return 0;
 
         WorldPacket data(MSG_AUCTION_HELLO, 12);
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		data << uint64(unit->GetGUID().GetCounter());
 #else
         data << uint64(unit->GetGUIDLow());
@@ -2410,7 +2410,7 @@ namespace LuaPlayer
         uint32 difficulty = Eluna::CHECKVAL<uint32>(L, 3, 0);
 
         if (difficulty < MAX_DIFFICULTY)
-#ifndef SUNWELL 
+#ifndef AZEROTHCORE 
             player->UnbindInstance(map, (Difficulty)difficulty);
 #else
 			sInstanceSaveMgr->PlayerUnbindInstance(player->GetGUIDLow(), map, Difficulty(difficulty), true, player);
@@ -2436,7 +2436,7 @@ namespace LuaPlayer
                 ++itr;
         }
 
-#elif defined SUNWELL
+#elif defined AZEROTHCORE
 		for (uint8 i = 0; i < MAX_DIFFICULTY; ++i)
 		{
 			const BoundInstancesMap& binds = sInstanceSaveMgr->PlayerGetBoundInstances(player->GetGUIDLow(), Difficulty(i));
@@ -2472,7 +2472,7 @@ namespace LuaPlayer
      */
     int LeaveBattleground(lua_State* L, Player* player)
     {
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         bool teleToEntryPoint = Eluna::CHECKVAL<bool>(L, 2, true);
 
         player->LeaveBattleground(teleToEntryPoint);
@@ -2635,7 +2635,7 @@ namespace LuaPlayer
 #ifdef CATA
         Eluna::Push(L, player->GetNextResetTalentsCost());
 #else
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		Eluna::Push(L, player->ResetTalentsCost());
 #else
         Eluna::Push(L, player->resetTalentsCost());
@@ -2656,7 +2656,7 @@ namespace LuaPlayer
 #ifdef CATA
         player->ResetTalents(no_cost);
 #else
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->ResetTalents(no_cost);
 #else
         player->resetTalents(no_cost);
@@ -2681,7 +2681,7 @@ namespace LuaPlayer
         bool disabled = Eluna::CHECKVAL<bool>(L, 3, false);
         bool learn_low_rank = Eluna::CHECKVAL<bool>(L, 4, true);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->RemoveSpell(entry, disabled, learn_low_rank);
 #else
         player->removeSpell(entry, disabled, learn_low_rank);
@@ -2848,7 +2848,7 @@ namespace LuaPlayer
             {
                 if (CreatureTemplate const* creatureInfo = sObjectMgr->GetCreatureTemplate(creature))
                     for (uint16 z = 0; z < creatureCount; ++z)
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
                         player->KilledMonster(creatureInfo, ObjectGuid::Empty);
 #else
 						player->KilledMonster(creatureInfo, 0);
@@ -2908,7 +2908,7 @@ namespace LuaPlayer
         if (ReqOrRewMoney < 0)
             player->ModifyMoney(-ReqOrRewMoney);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		if (sWorld->getBoolConfig(CONFIG_QUEST_ENABLE_QUEST_TRACKER)) // check if Quest Tracker is enabled
         {
             // prepare Quest Tracker datas
@@ -2941,7 +2941,7 @@ namespace LuaPlayer
 
 #ifdef TRINITY
         // check item starting quest (it can work incorrectly if added without item in inventory)
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         ItemTemplateContainer const& itc = sObjectMgr->GetItemTemplateStore();
 		auto itr = std::find_if(std::begin(itc), std::end(itc), [quest](ItemTemplateContainer::value_type const& value)
 		{
@@ -3045,12 +3045,12 @@ namespace LuaPlayer
     {
         std::string text = Eluna::CHECKVAL<std::string>(L, 2);
         uint32 lang = Eluna::CHECKVAL<uint32>(L, 3);
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
         Player* receiver = Eluna::CHECKOBJ<Player>(L, 4);
 #else
         uint64 guid = Eluna::CHECKVAL<uint64>(L, 4);
 #endif
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->Whisper(text, (Language)lang, receiver);
 #else
         player->Whisper(text, lang, ObjectGuid(guid));
@@ -3287,7 +3287,7 @@ namespace LuaPlayer
      */
     int AdvanceSkillsToMax(lua_State* /*L*/, Player* player)
     {
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->UpdateWeaponsSkillsToMaxSkillsForLevel();
 #else
         player->UpdateSkillsToMaxSkillsForLevel();
@@ -3398,7 +3398,7 @@ namespace LuaPlayer
 
         if (itemCount == 0 || dest.empty())
             return 1;
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         Item* item = player->StoreNewItem(dest, itemId, true, GenerateItemRandomPropertyId(itemId));
 #else
 		Item* item = player->StoreNewItem(dest, itemId, true, Item::GenerateItemRandomPropertyId(itemId));
@@ -3466,7 +3466,7 @@ namespace LuaPlayer
     {
         uint32 spellId = Eluna::CHECKVAL<uint32>(L, 2);
         bool update = Eluna::CHECKVAL<bool>(L, 3, true);
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->GetSpellHistory()->ResetCooldown(spellId, update);
 #else
         player->RemoveSpellCooldown(spellId, update);
@@ -3485,14 +3485,14 @@ namespace LuaPlayer
         uint32 category = Eluna::CHECKVAL<uint32>(L, 2);
         bool update = Eluna::CHECKVAL<bool>(L, 3, true);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->GetSpellHistory()->ResetCooldowns([category](SpellHistory::CooldownStorageType::iterator itr) -> bool
         {
             SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(itr->first);
             return spellInfo && spellInfo->GetCategory() == category;
         }, update);
 #else
-#ifndef SUNWELL 
+#ifndef AZEROTHCORE 
         player->RemoveSpellCategoryCooldown(category, update);
 #else
 		player->RemoveCategoryCooldown(category);
@@ -3506,7 +3506,7 @@ namespace LuaPlayer
      */
     int ResetAllCooldowns(lua_State* /*L*/, Player* player)
     {
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->GetSpellHistory()->ResetAllCooldowns();
 #else
         player->RemoveAllSpellCooldown();
@@ -3645,10 +3645,10 @@ namespace LuaPlayer
     {
         uint32 id = Eluna::CHECKVAL<uint32>(L, 2);
 
-#if defined TRINITY && !defined SUNWELL
+#if defined TRINITY && !defined AZEROTHCORE
 		player->LearnSpell(id, false);
 #else
-#ifndef SUNWELL
+#ifndef AZEROTHCORE
         player->learnSpell(id);
 #else
 #endif
@@ -4129,7 +4129,7 @@ namespace LuaPlayer
     }*/
 };
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

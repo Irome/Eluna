@@ -9,7 +9,7 @@
 #ifndef CLASSIC
 #ifndef TBC
 
-#ifdef SUNWELL
+#ifdef AZEROTHCORE
 #define TRINITY
 #endif
 
@@ -114,7 +114,7 @@ namespace LuaVehicle
     }
 }
 
-#if defined SUNWELL && defined TRINITY
+#if defined AZEROTHCORE && defined TRINITY
 #undef TRINITY
 #endif
 

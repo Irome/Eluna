@@ -13,7 +13,7 @@
 
 #include "Group.h"
 #include "Item.h"
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 #include "Player.h"
 #endif
 #include "Weather.h"
@@ -28,7 +28,7 @@ extern "C"
 #include "lua.h"
 };
 
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 struct ItemTemplate;
 typedef BattlegroundTypeId BattleGroundTypeId;
 #else
@@ -45,7 +45,7 @@ typedef int Difficulty;
 struct AreaTriggerEntry;
 class AuctionHouseObject;
 struct AuctionEntry;
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 class Battleground;
 typedef Battleground BattleGround;
 #endif
@@ -54,12 +54,12 @@ class Corpse;
 class Creature;
 class CreatureAI;
 class GameObject;
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 class GameObjectAI;
 #endif
 class Guild;
 class Group;
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 class InstanceScript;
 typedef InstanceScript InstanceData;
 #else
@@ -72,7 +72,7 @@ class Player;
 class Quest;
 class Spell;
 class SpellCastTargets;
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 class TempSummon;
 #else
 class TemporarySummon;
@@ -84,7 +84,7 @@ class Weather;
 class WorldPacket;
 #ifndef CLASSIC
 #ifndef TBC
-#if defined(TRINITY) || defined(SUNWELL)
+#if defined(TRINITY) || defined(AZEROTHCORE)
 class Vehicle;
 #else
 class VehicleInfo;
@@ -115,7 +115,7 @@ struct LuaScript
 #define ELUNA_STATE_PTR     "Eluna State Ptr"
 #define LOCK_ELUNA Eluna::Guard __guard(Eluna::GetLock())
 
-#if !defined(TRINITY) || !defined(SUNWELL)
+#if !defined(TRINITY) || !defined(AZEROTHCORE)
 #define TC_GAME_API
 #endif
 class TC_GAME_API Eluna
