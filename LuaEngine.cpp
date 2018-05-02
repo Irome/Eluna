@@ -523,7 +523,7 @@ void Eluna::RunScripts()
 void Eluna::InvalidateObjects()
 {
     ++callstackid;
-    ASSERT(callstackid, "Callstackid overflow");
+    ASSERT(callstackid && "Callstackid overflow");
 }
 
 void Eluna::Report(lua_State* _L)
