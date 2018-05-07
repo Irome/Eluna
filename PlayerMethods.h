@@ -3646,12 +3646,11 @@ namespace LuaPlayer
         uint32 id = Eluna::CHECKVAL<uint32>(L, 2);
 
 #if defined TRINITY && !defined AZEROTHCORE
-		player->LearnSpell(id, false);
-#else
-#ifndef AZEROTHCORE
+        player->LearnSpell(id, false);
+#elif defined AZEROTHCORE
         player->learnSpell(id);
 #else
-#endif
+        player->learnSpell(id, false);
 #endif
         return 0;
     }
