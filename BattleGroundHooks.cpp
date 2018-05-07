@@ -29,7 +29,7 @@ void Eluna::OnBGStart(BattleGround* bg, BattleGroundTypeId bgId, uint32 instance
     CallAllFunctions(BGEventBindings, key);
 }
 
-void Eluna::OnBGEnd(BattleGround* bg, BattleGroundTypeId bgId, uint32 instanceId, Team winner)
+void Eluna::OnBGEnd(BattleGround* bg, BattleGroundTypeId bgId, uint32 instanceId, TeamId winner)
 {
     START_HOOK(BG_EVENT_ON_END);
     Push(bg);
